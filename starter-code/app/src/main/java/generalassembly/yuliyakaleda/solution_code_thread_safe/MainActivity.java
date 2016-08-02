@@ -50,17 +50,14 @@ public class MainActivity extends AppCompatActivity{
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == PICK_IMAGE_REQUEST && resultCode == MainActivity.RESULT_OK && null != data) {
       Uri selectedImage = data.getData();
-      /*
-      TODO: Create the async task and execute it
-      ????????????????????????????????????????????
 
-      */
+      //TODO: Create the async task and execute it
+
 
       ImageProcessingAsyncTask imageProcessingAsyncTask = new ImageProcessingAsyncTask();
-      imageProcessingAsyncTask.execute();
+      imageProcessingAsyncTask.execute(selectedImage);
     }
   }
-
   // brings up the photo gallery/other resources to choose a picture
   private void selectImage() {
     Intent intent = new Intent();
@@ -92,15 +89,14 @@ public class MainActivity extends AppCompatActivity{
 //      //TODO: Update the progress bar
 //      //set progress bar to the integer/values
 //    }
-
-//    //TODO: Fill in the parameter type
-//    @Override
-//    protected void onPostExecute() {
-//      //TODO: Complete this method
-//
-//      //imageview.setview()
-//      //display image
-//    }
+@Override
+    //TODO: Fill in the parameter type
+    protected void onPostExecute(Bitmap bitmap) {
+      //TODO: Complete this method
+mImageView.setImageBitmap(bitmap);
+      //imageview.setview()
+      //display image
+    }
 
 
     @Override
@@ -114,10 +110,19 @@ public class MainActivity extends AppCompatActivity{
       Bitmap mutableBitmap = bitmap.copy(bitmap.getConfig(),true);
 
       //Loop through each pixel, and invert the colors
+
       for (int i = 0; i < mutableBitmap.getWidth(); i++) {
         for(int j = 0; j < mutableBitmap.getHeight(); j++){
           //TODO: Get the Red, Green, and Blue values for the current pixel, and reverse them
           //TODO: Set the current pixel's color to the new, reversed value
+          int pixel = mutableBitmap.getPixel(i, j);
+          int redValue = Color.red(pixel);
+          int blueValue = Color.blue(pixel);
+          int greenValue = Color.green(pixel);
+          int reverseRed = 255 - redValue;
+          int reverseBlue = 255 - blueValue;
+          int reverseGreen = 255 - greenValue;
+          mutableBitmap.setPixel(i, j, Color.argb(255,reverseRed,reverseBlue, reverseGreen ));
         }
         int progressVal = Math.round((long) (100*(i/(1.0*mutableBitmap.getWidth()))));
         //TODO: Update the progress bar. progressVal is the current progress value out of 100

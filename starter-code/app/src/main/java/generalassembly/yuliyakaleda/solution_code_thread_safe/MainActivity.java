@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity{
   private static final String TAG = MainActivity.class.getName();
@@ -49,7 +50,14 @@ public class MainActivity extends AppCompatActivity{
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == PICK_IMAGE_REQUEST && resultCode == MainActivity.RESULT_OK && null != data) {
       Uri selectedImage = data.getData();
-      //TODO: Create the async task and execute it
+      /*
+      TODO: Create the async task and execute it
+      ????????????????????????????????????????????
+
+      */
+
+      ImageProcessingAsyncTask imageProcessingAsyncTask = new ImageProcessingAsyncTask();
+      imageProcessingAsyncTask.execute();
     }
   }
 
@@ -61,12 +69,12 @@ public class MainActivity extends AppCompatActivity{
     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
   }
 
-  //TODO: Fill in the parameter types
-  private class ImageProcessingAsyncTask extends AsyncTask<> {
+  //TODO: Fill in the parameter types  param, progess, result
+  private class ImageProcessingAsyncTask extends AsyncTask<Uri,Integer,Bitmap> {
 
     //TODO: Fill in the parameter type
     @Override
-    protected Bitmap doInBackground() {
+    protected Bitmap doInBackground(Uri... params) {
       try {
         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(params[0]));
         return invertImageColors(bitmap);
@@ -76,18 +84,24 @@ public class MainActivity extends AppCompatActivity{
       return null;
     }
 
-    //TODO: Fill in the parameter type
-    @Override
-    protected void onProgressUpdate() {
-      super.onProgressUpdate(values);
-      //TODO: Update the progress bar
-    }
 
     //TODO: Fill in the parameter type
-    @Override
-    protected void onPostExecute() {
-      //TODO: Complete this method
-    }
+//    @Override
+//    protected void onProgressUpdate(Integer values) {
+//      super.onProgressUpdate(values);
+//      //TODO: Update the progress bar
+//      //set progress bar to the integer/values
+//    }
+
+//    //TODO: Fill in the parameter type
+//    @Override
+//    protected void onPostExecute() {
+//      //TODO: Complete this method
+//
+//      //imageview.setview()
+//      //display image
+//    }
+
 
     @Override
     protected void onPreExecute() {

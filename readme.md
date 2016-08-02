@@ -1,5 +1,5 @@
 ---
-title: Thread-Safe Lab: Image Processing
+title: Thread-Safe Lab - Image Processing
 type: lab
 duration: "1:25"
 creator:

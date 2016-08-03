@@ -13,11 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity{
   private static final String TAG = MainActivity.class.getName();
@@ -88,6 +91,8 @@ public class MainActivity extends AppCompatActivity{
 //      super.onProgressUpdate(values);
 //      //TODO: Update the progress bar
 //      //set progress bar to the integer/values
+//
+//      mProgressBar.setVisibility(VISIBLE);
 //    }
 @Override
     //TODO: Fill in the parameter type
